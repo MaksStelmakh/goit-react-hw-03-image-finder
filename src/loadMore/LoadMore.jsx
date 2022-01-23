@@ -1,7 +1,9 @@
+import { LoadMoreBtn } from "./LoadMore.styled";
+
 export default function LoadMore({ click }) {
   return (
-    <button type="button" onClick={click}>
+    <LoadMoreBtn type="button" onClick={click}>
       Load more
-    </button>
+    </LoadMoreBtn>
   );
 }

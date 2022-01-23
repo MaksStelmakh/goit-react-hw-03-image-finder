@@ -1,11 +1,11 @@
 import { Component } from "react";
-import Searchbar from "./searchbar/Searchbar";
-import ImageGallery from "./iageGallery/ImageGallery";
+import Searchbar from "../searchbar/Searchbar";
+import ImageGallery from "../iageGallery/ImageGallery";
+import { AppWrapper } from "./App.styled";
 
 export default class App extends Component {
   state = {
     images: "",
-    showModal: false,
   };
 
   handleFormSubmit = (images) => {
@@ -14,10 +14,10 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
+      <AppWrapper>
         <Searchbar onSubmit={this.handleFormSubmit} />
         <ImageGallery imgName={this.state.images} />
-      </div>
+      </AppWrapper>
     );
   }
 }
