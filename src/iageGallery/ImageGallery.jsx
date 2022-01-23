@@ -18,37 +18,42 @@ export default class ImageGallery extends Component {
     });
   };
 
-  async componentDidUpdate(prevProps, prevState) {
-    const page = this.state.page;
-    console.log(page);
+  getImageFetch = () => {
+    fetch(
+      `https://pixabay.com/api/?q=${this.props.imgName}&page=${this.state.page}&key=24435694-017d2bab3470121913608c0c0&image_type=photo&orientation=horizontal&per_page=12`
+    ).then((response) => {
+      if (response.ok) {
+        return response
+          .json()
+          .then(({ hits }) => {
+            this.state.images
+              ? this.setState(({ images }) => ({
+                  images: [...images, ...hits],
+                }))
+              : this.setState({ images: hits });
+          })
+          .finally(() => this.setState({ loading: false }));
+      }
+      return Promise.reject(new Error("Nothing found"));
+    });
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.page !== this.state.page) {
+      this.getImageFetch();
+      return;
+    }
     if (prevProps.imgName !== this.props.imgName) {
       if (prevProps.imgName) {
         this.setState({ images: null });
       }
       this.setState({ loading: true });
-      fetch(
-        `https://pixabay.com/api/?q=${this.props.imgName}&page=${page}&key=24435694-017d2bab3470121913608c0c0&image_type=photo&orientation=horizontal&per_page=12`
-      ).then((response) => {
-        if (response.ok) {
-          return response
-            .json()
-            .then(({ hits }) => {
-              this.state.images
-                ? this.setState(({ images }) => ({
-                    images: [...images, hits],
-                  }))
-                : this.setState({ images: hits });
-            })
-            .finally(() => this.setState({ loading: false }));
-        }
-        return Promise.reject(new Error("Nothing found"));
-      });
+      this.getImageFetch();
     }
   }
   render() {
     const pictures = this.state.images;
     const loading = this.state.loading;
-    // console.log(this.state.page);
     return (
       <>
         <ul className="gallery">

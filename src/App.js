@@ -5,6 +5,7 @@ import ImageGallery from "./iageGallery/ImageGallery";
 export default class App extends Component {
   state = {
     images: "",
+    showModal: false,
   };
 
   handleFormSubmit = (images) => {
