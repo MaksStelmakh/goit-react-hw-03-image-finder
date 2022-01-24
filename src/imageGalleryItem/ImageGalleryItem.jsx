@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Component } from "react";
 import Modal from "../modal/Modal";
 import { Items } from "./ImageGalleryItem.styled";
@@ -14,10 +15,10 @@ export default class ImageGalleryItem extends Component {
   };
 
   render() {
-    const { bigPhoto, smallPhoto, tags } = this.props;
+    const { bigPhoto, smallPhoto, tag } = this.props;
     return (
       <Items>
-        <img onClick={this.toggleModal} src={smallPhoto} alt={tags} />
+        <img onClick={this.toggleModal} src={smallPhoto} alt={tag} />
         {this.state.showModal && (
           <Modal photo={bigPhoto} onClose={this.toggleModal} />
         )}
@@ -25,3 +26,9 @@ export default class ImageGalleryItem extends Component {
     );
   }
 }
+
+ImageGalleryItem.propTypes = {
+  bigPhoto: PropTypes.string.isRequired,
+  smallPhoto: PropTypes.string.isRequired,
+  tag: PropTypes.string.isRequired,
+};

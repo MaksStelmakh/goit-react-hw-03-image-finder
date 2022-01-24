@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { LoadMoreBtn } from "./LoadMore.styled";
 
 export default function LoadMore({ click }) {
@@ -7,3 +8,7 @@ export default function LoadMore({ click }) {
     </LoadMoreBtn>
   );
 }
+
+LoadMore.propTypes = {
+  click: PropTypes.func.isRequired,
+};

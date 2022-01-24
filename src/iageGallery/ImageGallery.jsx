@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Component } from "react";
 import { TailSpin } from "react-loader-spinner";
 import ImageGalleryItem from "../imageGalleryItem/ImageGalleryItem";
@@ -22,6 +23,7 @@ export default class ImageGallery extends Component {
         this.setState({ images: null });
       }
       this.setState({ loading: true });
+      this.setState({ page: 1 });
       this.getImageFetch();
     }
     if (this.state.images && this.state.images.length === 0) {
@@ -92,3 +94,7 @@ export default class ImageGallery extends Component {
     );
   }
 }
+
+ImageGallery.propTypes = {
+  imgName: PropTypes.string.isRequired,
+};
