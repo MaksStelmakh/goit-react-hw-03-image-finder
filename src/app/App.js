@@ -5,18 +5,18 @@ import { AppWrapper } from "./App.styled";
 
 export default class App extends Component {
   state = {
-    images: "",
+    searchValue: "",
   };
 
-  handleFormSubmit = (images) => {
-    this.setState({ images });
+  handleFormSubmit = (searchValue) => {
+    this.setState({ searchValue });
   };
 
   render() {
     return (
       <AppWrapper>
         <Searchbar onSubmit={this.handleFormSubmit} />
-        <ImageGallery imgName={this.state.images} />
+        <ImageGallery imgName={this.state.searchValue} />
       </AppWrapper>
     );
   }

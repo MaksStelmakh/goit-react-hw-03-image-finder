@@ -41,11 +41,11 @@ export default class ImageGallery extends Component {
   };
 
   getImageFetch = () => {
-    const PropsName = this.props.imgName;
-    const page = this.state.page;
+    const { imgName } = this.props;
+    const { page } = this.state;
     const apiKey = `24435694-017d2bab3470121913608c0c0`;
     fetch(
-      `https://pixabay.com/api/?q=${PropsName}&page=${page}&key=${apiKey}&image_type=photo&orientation=horizontal&per_page=12`
+      `https://pixabay.com/api/?q=${imgName}&page=${page}&key=${apiKey}&image_type=photo&orientation=horizontal&per_page=12`
     ).then((response) => {
       if (response.ok) {
         return response
@@ -59,6 +59,12 @@ export default class ImageGallery extends Component {
             if (hits.length === 0) {
               alert(`Images are over!`);
             }
+          })
+          .then(() => {
+            window.scrollTo({
+              top: document.documentElement.scrollHeight,
+              behavior: "smooth",
+            });
           })
           .finally(() => this.setState({ loading: false }));
       }

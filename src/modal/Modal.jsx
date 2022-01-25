@@ -27,11 +27,11 @@ export default class Modal extends Component {
   };
 
   render() {
-    const photo = this.props.photo;
+    const { photo, tag } = this.props;
     return createPortal(
       <Overlay onClick={this.handleBackdropClick}>
         <ModalDiv>
-          <img src={photo} alt="" />
+          <img src={photo} alt={tag} />
         </ModalDiv>
       </Overlay>,
       modalRoot
@@ -41,4 +41,5 @@ export default class Modal extends Component {
 
 Modal.propTypes = {
   photo: PropTypes.string.isRequired,
+  tag: PropTypes.string.isRequired,
 };
